@@ -17,4 +17,26 @@ require 'faker'
 end
 users = User.all
 
+# Create Lists
+10.times do
+  list = List.create(
+        title:  Faker::Lorem.sentence,
+        permissions: ["open", "viewable", "private"].sample,
+        user: users.sample
+)
+end
+lists = List.all
+
+# Create Items
+15.times do
+  item = Item.create(
+        item_name:  Faker::Lorem.sentence,
+        status: ["complete", "incomplete"].sample,
+        list: lists.sample
+)
+end
+items = Item.all
+
 puts "#{User.count} users created"
+puts "#{List.count} lists created"
+puts "#{Item.count} items created"

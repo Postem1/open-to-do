@@ -3,4 +3,6 @@ class List < ActiveRecord::Base
   has_many :items
 
   validates :title, presence: true
+  validates :permissions, presence: true
+  validates :permissions, inclusion: { in: %w(private viewable open) }
 end
