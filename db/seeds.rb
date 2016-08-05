@@ -5,3 +5,16 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+require 'faker'
+
+# Create Users
+5.times do
+  user = User.create(
+        email:  Faker::Internet.email,
+        name:   Faker::Name.first_name,
+        password: 'password'
+)
+end
+users = User.all
+
+puts "#{User.count} users created"
