@@ -10,30 +10,30 @@ require 'faker'
 # Create Users
 5.times do
   user = User.create(
-        email:  Faker::Internet.email,
-        name:   Faker::Name.first_name,
-        password: 'password'
-)
+    email:  Faker::Internet.email,
+    name:   Faker::Name.first_name,
+    password: 'password'
+  )
 end
 users = User.all
 
 # Create Lists
 10.times do
   list = List.create(
-        title:  Faker::Lorem.sentence,
-        permissions: ["open", "viewable", "private"].sample,
-        user: users.sample
-)
+    title:  Faker::Lorem.sentence,
+    permissions: %w(open viewable private).sample,
+    user: users.sample
+  )
 end
 lists = List.all
 
 # Create Items
 15.times do
   item = Item.create(
-        item_name:  Faker::Lorem.sentence,
-        status: ["complete", "incomplete"].sample,
-        list: lists.sample
-)
+    item_name:  Faker::Lorem.sentence,
+    status: %w(complete incomplete).sample,
+    list: lists.sample
+  )
 end
 items = Item.all
 

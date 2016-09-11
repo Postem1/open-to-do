@@ -1,4 +1,4 @@
-class Api::ItemsController < ApiController
+class Api::ItemsController < ApiController # rubocop:disable Style/ClassAndModuleChildren Metrics/LineLength Style/Documentation
   before_action :authenticated?
 
   def create
@@ -7,7 +7,7 @@ class Api::ItemsController < ApiController
       render json: item
     else
       render json: { errors: item.errors.full_messages },
-      status: :unprocessable_entity
+             status: :unprocessable_entity
     end
   end
 
@@ -17,7 +17,7 @@ class Api::ItemsController < ApiController
       render json: item
     else
       render json: { errors: item.errors.full_messages },
-      status: :unprocessable_entity
+             status: :unprocessable_entity
     end
   end
 
