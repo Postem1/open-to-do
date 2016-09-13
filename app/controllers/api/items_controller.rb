@@ -2,7 +2,8 @@ class Api::ItemsController < ApiController
   before_action :authenticated?
 
   def create
-    item = Item.new(item_params)
+    list = List.find(params[:list_id])
+    item = list.items.build(item_params)
     if item.save
       render json: item
     else
@@ -13,7 +14,8 @@ class Api::ItemsController < ApiController
 
   def update
     item = Item.find(params[:id])
-    if item.update(item_params)
+    item.assign_attributes(item_params)
+    if item.save
       render json: item
     else
       render json: { errors: item.errors.full_messages },

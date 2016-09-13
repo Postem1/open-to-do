@@ -28,7 +28,7 @@ end
 lists = List.all
 
 # Create Items
-15.times do
+50.times do
   item = Item.create(
     item_name:  Faker::Lorem.sentence,
     status: %w(complete incomplete).sample,
