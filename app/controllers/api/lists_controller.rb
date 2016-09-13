@@ -1,6 +1,4 @@
-class Api::ListsController < ApiController # rubocop:disable Style/Documentation Style/ClassAndModuleChildren Metrics/LineLength
-  before_action :authenticated?
-
+class Api::ListsController < ApiController
   def create
     list = List.new(list_params)
     if list.save
