@@ -1,6 +1,13 @@
 class Api::ListsController < ApiController
+  before_action :authenticated?
+
+  def index
+    lists = current_user.lists
+    render json: lists, each_serializer: ListSerializer
+  end
+
   def create
-    list = List.new(list_params)
+    list = current_user.lists.build(list_params)
     if list.save
       render json: list
     else
@@ -11,6 +18,7 @@ class Api::ListsController < ApiController
 
   def update
     list = List.find(params[:id])
+    raise unless list.user == current_user
     if list.update(list_params)
       render json: list
     else
@@ -21,6 +29,7 @@ class Api::ListsController < ApiController
 
   def destroy
     list = List.find(params[:id])
+    raise unless list.user == current_user
     list.destroy
     render json: {}, status: :no_content
   rescue ActiveRecord::RecordNotFound
