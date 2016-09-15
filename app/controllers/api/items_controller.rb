@@ -24,14 +24,12 @@ class Api::ItemsController < ApiController
   end
 
   def destroy
-    begin # rubocop:disable Style/RedundantBegin
-      item = Item.find(params[:id])
-      raise unless item.list.user == current_user
-      item.destroy
-      render json: {}, status: :no_content
-    rescue ActiveRecord::RecordNotFound
-      render json: {}, status: :not_found
-    end
+    item = Item.find(params[:id])
+    raise unless item.list.user == current_user
+    item.destroy
+    render json: {}, status: :no_content
+  rescue ActiveRecord::RecordNotFound
+    render json: {}, status: :not_found
   end
 
   private
